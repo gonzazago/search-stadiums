@@ -10,6 +10,7 @@ const  Login = () => {
   const [password, setPassword] = useState('')
   const handleUserName = (target) => {
    console.log( target)
+   setUserName(target)
   }
   return (
     <View style={styles.container}>
@@ -19,28 +20,31 @@ const  Login = () => {
          style={styles.containerAction} >
            <Form style={styles.containerButtons}>
                <TextInput
+                  style={styles.textInput}
                   autoCorrect={false}
-                  onChangeText={handleUserName}
+                  onChangeText={setUserName}
                   placeholder='Usuario'
                   value={userName}
                />
                 <View style={styles.separator} />
                 <TextInput
+                style={styles.textInput}
                   autoCorrect={false}
-                  onChangeText={handleUserName}
-                  placeholder='Usuario'
-                  value={userName}
+                  onChangeText={setPassword}
+                  placeholder='Password'
+                  value={password}
                   password={true}
                />
             </Form>
+            <View style={styles.containerSumit}>
+              <ButtonForm
+              style={styles.button}
+              title='Iniciar Sesion'
+              action='listStadiums'
+              handleOnPress={ () => console.log(login)}/>
+              </View>
         </KeyboardAvoidingView>
-        <View style={styles.containerSumit}>
-        <ButtonForm
-        style={styles.button}
-        title='Iniciar Sesion'
-        action='listStadiums'
-        handleOnPress={ () => console.log(login)}/>
-        </View>
+
 
     </View>
   );
@@ -71,10 +75,11 @@ const styles = StyleSheet.create({
     },
   containerButtons:{
     backgroundColor: colors.white,
-    borderRadius:20
+    borderRadius:20,
   },
   containerSumit:{
-    bottom: 80,
+    top: 80,
+
     justifyContent:'center',
     alignItems:'center',
   },
@@ -82,6 +87,13 @@ const styles = StyleSheet.create({
     borderColor: colors.primary,
     backgroundColor: colors.white,
     color: colors.primary,
+    width: 300,
+  },
+  textInput:{
+    borderBottomColor: colors.primary,
+    borderBottomWidth:2,
+    width:200,
+    textAlign:'center'
   }
 });
 

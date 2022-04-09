@@ -72,7 +72,7 @@ const styles = StyleSheet.create({
       },
       text:{
         color: colors.primary,
-        fontFamily: 'open-sans-bold'
+        fontFamily: 'OpenSansBold'
       }
 });
 export default Home

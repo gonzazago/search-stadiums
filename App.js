@@ -4,6 +4,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Login from './screen/loginScreen';
 import { useFonts } from 'expo-font';
 import AppLoading from 'expo-app-loading';
+import SignUpScreen from './screen/signUpScreen';
 
 const  App = () => {
   const Stack = createNativeStackNavigator();
@@ -22,6 +23,7 @@ const  App = () => {
            initialRouteName="Home">
         <Stack.Screen name="Home" component={Home} />
         <Stack.Screen name="Login" component={Login} />
+        <Stack.Screen name="SignUp" component={SignUpScreen} />
       </Stack.Navigator>
       </NavigationContainer>
   )

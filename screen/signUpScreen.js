@@ -1,9 +1,9 @@
 import React from 'react'
-import { View } from 'react-native'
+import { Text, View } from 'react-native'
 
 const SignUpScreen = () => {
   return (
-    <View> SignUp </View>
+    <Text>SignUpScreen</Text>
   )
 }
 
