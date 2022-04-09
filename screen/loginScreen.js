@@ -30,6 +30,7 @@ const  Login = () => {
                   onChangeText={handleUserName}
                   placeholder='Usuario'
                   value={userName}
+                  password={true}
                />
             </Form>
         </KeyboardAvoidingView>
