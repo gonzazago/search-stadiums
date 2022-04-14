@@ -5,6 +5,7 @@ import Login from './screen/loginScreen';
 import { useFonts } from 'expo-font';
 import AppLoading from 'expo-app-loading';
 import SignUpScreen from './screen/signUpScreen';
+import SearchScreen from './screen/searchScreen';
 
 const  App = () => {
   const Stack = createNativeStackNavigator();
@@ -17,13 +18,17 @@ const  App = () => {
     
       <NavigationContainer>
         <Stack.Navigator
-          screenOptions={{
-            headerShown: false
-          }}
-           initialRouteName="Home">
+           initialRouteName="Search">
         <Stack.Screen name="Home" component={Home} />
         <Stack.Screen name="Login" component={Login} />
         <Stack.Screen name="SignUp" component={SignUpScreen} />
+        <Stack.Screen name="Search" component={SearchScreen} options={{
+          title: 'Canchas',
+          headerStyle:{
+            backgroundColor:"#258A4E",
+          },
+          headerTintColor: '#fff',         
+        }} />
       </Stack.Navigator>
       </NavigationContainer>
   )

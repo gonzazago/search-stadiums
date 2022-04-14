@@ -1,9 +1,10 @@
 import React from 'react'
-import { View, StyleSheet,ImageBackground, Text, TouchableOpacity } from 'react-native';
+import { View, StyleSheet, Text, TouchableOpacity } from 'react-native';
 import image from '../assets/banner.png'
 import Banner from '../components/Banner';
 import ButtonForm from '../components/Button';
 import Form from '../components/Form';
+import Separator from '../components/separator';
 import colors from '../constanst/color';
 const Home = ({navigation}) => {
 
@@ -19,15 +20,13 @@ const Home = ({navigation}) => {
             <Form style={styles.containerButtons}>
                 <ButtonForm
                     style={styles.buttonLogin}
-                    color={colors.primary}
                     title={'Registrarse'}
                     action={'SignUp'}
                     handleOnPress= {handleOnPress}
                 />
-                <View style={styles.separator} />
+                <Separator style={styles.separator} />
                 <ButtonForm
                     style={styles.buttonRegister}
-                    color={colors.primary}
                     title={'Login'}
                     action={'Login'}
                     handleOnPress= {handleOnPress}
@@ -59,20 +58,14 @@ const styles = StyleSheet.create({
         top:400 ,
         alignItems:'center'
     },
-    separator: {
-        height:20,
-        width: '100%',
-        borderBottomColor: colors.primary,
-        borderBottomWidth: StyleSheet.hairlineWidth,
-      },
-      buttonLogin:{
+    buttonLogin:{
         borderColor: colors.primary,
         backgroundColor: colors.white,
         color: colors.primary
-      },
-      text:{
+    },
+    text:{
         color: colors.primary,
         fontFamily: 'OpenSansBold'
-      }
+    }
 });
 export default Home
