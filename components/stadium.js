@@ -1,12 +1,18 @@
 import React from 'react'
 import { ImageBackground, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { EvilIcons } from '@expo/vector-icons'; 
 import Separator from './separator';
+import ButtonForm from './Button';
+import { useNavigation } from '@react-navigation/native';
 
 const Stadium = (props) => {
     const {stadium} = props;
-    const { name, distance, description, price, images} = stadium.item
-    console.log('Stadium: ',stadium);
-
+    const navigation = useNavigation();
+    const handleOnPress = (id) =>{
+        navigation.navigate('Detail',{id})
+        
+    }
+    const { id,name, distance, description, price, images} = stadium.item
   return (
     <View style={styles.stadium}>
         <View style={styles.carrousel}>
@@ -16,10 +22,11 @@ const Stadium = (props) => {
             <Text style={styles.title}>{name}</Text>
             <Text style={styles.distance}>{`A ${distance} mts de Distancia`}</Text>
         </View>
-
         <TouchableOpacity style={styles.location}>
+        <EvilIcons style={styles.location_text} name="location" size={24} color="#258a4e"/>
             <Text style={styles.location_text}> Ver Ubicacion</Text>
         </TouchableOpacity>
+
         <View style={styles.content}>
             <Text style={styles.text_content}>{description}
             </Text>
@@ -31,12 +38,17 @@ const Stadium = (props) => {
                     <Text style={styles.buttonPriceContent}>{price}</Text>
                 </View>
             </View>
-                <TouchableOpacity style={styles.buttonDetail}>
-                    <Text style={styles.buttonContent}> Detalle</Text>
-                </TouchableOpacity>
+            <ButtonForm
+                style={styles.buttonDetail}
+                action='detail'
+                handleOnPress={()=>handleOnPress(id)}
+                key={id}
+                textColor={'#258A4E'}
+                title={'Detalle'}
+            />
          </View>
     </View>
-)}
+)};
 const styles = StyleSheet.create({
     carrousel:{
         width: '100%',
@@ -76,17 +88,18 @@ const styles = StyleSheet.create({
         fontSize:12       
     },
     location:{
+        flexDirection:'row',
         backgroundColor:  "rgba(37, 138, 78, 0.19)",
-        height: 44,
-        width: 118,
-        left: 250,
+        height: 54,
+        width: 150,
+        left: 240,
         borderRadius:10,
-        alignItems:'center'
+        justifyContent:'center'
     },
     location_text:{
         color: "#258A4E",
-        alignItems:'baseline',
-        top:8
+        alignSelf:'center',
+        top:2
     },
     image:{
         width: 'auto',
@@ -118,7 +131,7 @@ const styles = StyleSheet.create({
         width: 118,
         height: 24,
         top: 30,
-        right: 40,
+        right: 20,
         borderRadius:10,
         elevation:5,
         alignItems:'center'
@@ -160,6 +173,23 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         textAlign: 'center',
         top:5
+    },
+    locationContainer:{
+        left:250,
+        alignContent:'center',
+        marginBottom:20
+
+
+    },
+    locationButon:{
+        backgroundColor:  "rgba(37, 138, 78, 0.19)",
+        height: 44,
+        width: 118,
+        borderRadius:10,
+        color:'white',
+        textAlign:'center',
+        borderWidth:0
+        
     }
 })
 

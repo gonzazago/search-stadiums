@@ -3,17 +3,21 @@ import {Text,TouchableOpacity,StyleSheet } from 'react-native'
 import PropTypes from 'prop-types'
 
 const ButtonForm = (props) => {
-  const {title, handleOnPress, action }= props
+  const {title, handleOnPress, action, textColor }= props
 
   const onPress = action => {
     handleOnPress(action);
   }
+  const color =  !textColor ? 'white' : textColor
+  const textStyle = {
+    color,
+    textAlign:'center'
+  }
   return (
-
       <TouchableOpacity
         style={{...styles.button,...props.style}}
         onPress={ () => onPress(action)}>
-        <Text style={{...styles.text,...props.style}}>{title}</Text>
+        <Text style={textStyle}>{title}</Text>
       </TouchableOpacity>
   )
 }
@@ -30,12 +34,6 @@ const styles = StyleSheet.create({
       borderColor: '#ffff',
       borderWidth:1
   },
-  text:{
-    color: 'white',
-    textAlign:'center'
-
-  }
-
 });
 
 
