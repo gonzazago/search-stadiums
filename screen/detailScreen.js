@@ -1,29 +1,25 @@
 import React,{useState,useEffect} from 'react'
-import data from '../mocks/stadiums.json';
 import Spinner from '../components/spinner';
 import { Text, View } from 'react-native';
+import { searchStadiumByIdAction } from '../store/actions/stadiums/stadiumActions';
+import { useDispatch, useSelector } from 'react-redux';
 
 const DetailScreen = ({ route, navigation }) => {
-  
-  const [isFetching, setIsFetching] = useState(true)
-  const [stadium, setStadium] = useState({})
+  const dispatch = useDispatch();
   const {id} = route.params;
-  const {stadiums} = data;
 
   useEffect(() => {
-      const fethStadium = () =>{
-        console.log('UseEffect')
-        console.log('Stadiums: ', stadiums)
-        const response = stadiums.filter(s => s.id === id);
-        console.log('Response: ', response.name)
-        setStadium(response);
-        setIsFetching(false)
-      }
-      setTimeout(()=>{fethStadium()},300)
-  }, [id])
+      const fetchStadium = () => dispatch(searchStadiumByIdAction(id));
+      fetchStadium();
+  }, [])
+  
+  const fetching = useSelector(state =>  state.stadiums.fetching);
+  const stadium = useSelector(state => state.stadiums.stadium);
+  console.log('STADIUM: ', stadium)
+
 
   return (
-    isFetching ? 
+    fetching ? 
       <Spinner/> 
     :
     <View>

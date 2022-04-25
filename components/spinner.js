@@ -1,10 +1,17 @@
-import React from 'react'
+import React, {useState, useEffect} from 'react'
 import { ActivityIndicator, StyleSheet, View } from 'react-native'
 
-const Spinner = ({show, color}) => {
+const Spinner = ({hide, color}) => {
+  const [show, setShow] = useState(true);
+  useEffect(()=>{
+    setShow(hide);
+  },[hide])
+  console.log('SHOW:',show)
+  if (!show) return null;
   return (
+    show  &&
     <View style={[styles.container, styles.horizontal]}>
-         <ActivityIndicator size="large" color="rgba(37, 138, 78, 0.8)" />
+         <ActivityIndicator size="large" color={color} />
     </View>
   )
 }

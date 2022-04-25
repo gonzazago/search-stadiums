@@ -1,6 +1,8 @@
 import { useFonts } from 'expo-font';
 import AppLoading from 'expo-app-loading';
 import MainNavigator from './navigation';
+import { Provider } from 'react-redux';
+import store from './store';
 
 const  App = () => {
   const [loaded] = useFonts({
@@ -9,7 +11,10 @@ const  App = () => {
   })
   if(!loaded) return <AppLoading/>
   return (
-    <MainNavigator/>
+    <Provider store={store}>
+        <MainNavigator/>
+    </Provider>
+
   )
 }
 
