@@ -21,6 +21,7 @@ const stadiumReducer = (state = initialSate, action) =>{
         };
         case SEARCH_STADIUM_BY_ID_SUCCESS:{
             console.log('SEARCH_STADIUM_BYD')
+            console.log('PAYLOAD:', payload);
             return{...state,fetching:false,stadium:payload};
         }
         default: return state;

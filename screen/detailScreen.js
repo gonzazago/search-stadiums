@@ -13,14 +13,16 @@ const DetailScreen = ({ route, navigation }) => {
       fetchStadium();
   }, [])
   
-  const fetching = useSelector(state =>  state.stadiums.fetching);
-  const stadium = useSelector(state => state.stadiums.stadium);
-  console.log('STADIUM: ', stadium)
+  const fetching = useSelector(state => 
+    {console.log('FETCHING:', state.stadiums.fetching);
+      return state.stadiums.fetching;
+    });
+  const stadium = useSelector(state => state.stadiums.stadium[0]);
 
 
   return (
     fetching ? 
-      <Spinner/> 
+      <Spinner hide={fetching} color={"rgba(37, 138, 78, 0.8)"}/> 
     :
     <View>
       <Text>Stadium: {stadium.name}</Text>

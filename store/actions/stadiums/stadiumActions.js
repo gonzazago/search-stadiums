@@ -1,4 +1,4 @@
-import { SEARCH_STADIUMS, SEARCH_STADIUMS_SUCCESS, SEARCH_STADIUM_BY_ID } from "./actions"
+import { SEARCH_STADIUMS, SEARCH_STADIUMS_SUCCESS, SEARCH_STADIUM_BY_ID, SEARCH_STADIUM_BY_ID_SUCCESS } from "./actions"
 import data from '../../../mocks/stadiums.json'
 
 export function searchStadiumsAction(){
@@ -37,6 +37,6 @@ const searchStadiumById = () =>({
 });
 
 const searchStadiumByIdSuccess = (stadium) =>({
-    type: SEARCH_STADIUM_BY_ID,
+    type: SEARCH_STADIUM_BY_ID_SUCCESS,
     payload: stadium
 });
