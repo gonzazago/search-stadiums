@@ -11,10 +11,11 @@ export function searchStadiumsAction(){
 }
 
 export function searchStadiumByIdAction (id){
+    
     return async (dispatch) =>{
+        console.log('searchStadiumById')
         dispatch(searchStadiumById());
         setTimeout(()=>{
-            console.log('ID: ',id)
         const stadium = data.stadiums.filter(s => s.id === id)
         dispatch(searchStadiumByIdSuccess(stadium));
         },5000)

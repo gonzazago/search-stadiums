@@ -6,7 +6,6 @@ const Spinner = ({hide, color}) => {
   useEffect(()=>{
     setShow(hide);
   },[hide])
-  console.log('SHOW:',show)
   if (!show) return null;
   return (
     show  &&

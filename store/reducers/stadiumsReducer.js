@@ -9,6 +9,8 @@ const initialSate = {
 const stadiumReducer = (state = initialSate, action) =>{
 
     const {type, payload } = action;
+    console.log('TYPE:', type)
+    console.log('payload:', payload)
     switch (type){
         case SEARCH_STADIUMS:
         case SEARCH_STADIUM_BY_ID:
@@ -19,11 +21,10 @@ const stadiumReducer = (state = initialSate, action) =>{
             fetching: false,
             stadiums: payload
         };
-        case SEARCH_STADIUM_BY_ID_SUCCESS:{
+        case SEARCH_STADIUM_BY_ID_SUCCESS:
             console.log('SEARCH_STADIUM_BYD')
             console.log('PAYLOAD:', payload);
             return{...state,fetching:false,stadium:payload};
-        }
         default: return state;
     }
     
