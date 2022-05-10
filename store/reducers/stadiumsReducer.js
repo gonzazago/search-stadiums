@@ -9,8 +9,6 @@ const initialSate = {
 const stadiumReducer = (state = initialSate, action) =>{
 
     const {type, payload } = action;
-    console.log('TYPE:', type)
-    console.log('payload:', payload)
     switch (type){
         case SEARCH_STADIUMS:
         case SEARCH_STADIUM_BY_ID:

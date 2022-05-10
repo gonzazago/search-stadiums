@@ -6,6 +6,7 @@ import Login from '../../screen/loginScreen';
 import SignUpScreen from '../../screen/signUpScreen';
 import SearchScreen from '../../screen/searchScreen';
 import DetailScreen from '../../screen/detailScreen';
+import AddStadiumScreen from '../../screen/addStadiumScreen';
 
 
 const Stack = createNativeStackNavigator();
@@ -31,6 +32,9 @@ return(
             },
             headerTintColor: '#fff',         
         }} />
+        <Stack.Screen name="Add" component={AddStadiumScreen} options={{
+            title:'Agregar Cancha'
+        }}/>
 </Stack.Navigator>
 )
 }

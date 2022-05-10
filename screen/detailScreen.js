@@ -8,24 +8,25 @@ import Carrousel from '../components/carrousel';
 import {Rating} from 'react-native-ratings';
 
 const DetailScreen = ({ route, navigation }) => {
+  console.log('NAVIGATION:', navigation)
   const dispatch = useDispatch();
   const {id} = route.params;
-
+  useEffect(() => {
+    const unsubscribe = navigation.addListener('focus', () => {        
+      dispatch(searchStadiumByIdAction(id));
+    });  
+    return unsubscribe;      
+  }, [navigation])
   
   const fetching = useSelector(state => state.stadiums.fetching);
-  const stadium = useSelector(state =>{
-    console.log('STATE:', state)
-    return state.stadiums.stadium[0];
-  })
-
+  const stadium = useSelector(state => state.stadiums.stadium[0])
   
-  useEffect(() => {
-    console.log('useEffect')
-    dispatch(searchStadiumByIdAction(id))
-  }, [navigation])
+  console.log ('STADIUM', stadium)
+
+
 
   return (
-    fetching ? 
+    !stadium ? 
       <Spinner hide={fetching} color={"rgba(37, 138, 78, 0.8)"}/> 
     :
     <View style={styles.container}>
@@ -40,9 +41,9 @@ const DetailScreen = ({ route, navigation }) => {
             <View style={styles.nameContainer}>
                 <Text style={styles.name}>{stadium.name}</Text>
             </View>
-                            <Rating
+                  <Rating
                   showRating
-                  onFinishRating={this.ratingCompleted}
+                  onFinishRating={() => console.log('ACA')}
                   style={{ paddingVertical: 10 }}
                 />
           </View>
