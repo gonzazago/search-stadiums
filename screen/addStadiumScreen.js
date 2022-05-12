@@ -1,9 +1,9 @@
  import React,{useState} from 'react'
-import {View,ScrollView, StyleSheet, Text,TouchableOpacity} from 'react-native'
-import { Feather } from '@expo/vector-icons';
+import {View,ScrollView, StyleSheet, Text,TouchableOpacity, Image} from 'react-native'
+
 import { MaterialIcons } from '@expo/vector-icons';
 import TextInputComponent from '../components/textInputComponent';
-import {  } from 'react-native-web';
+import ImageSelector from '../components/ImageSelector';
 
 
 const AddStadiumScreen = () => {
@@ -11,7 +11,12 @@ const AddStadiumScreen = () => {
     const [address, setAddress] = useState('');
     const [price, setPrice] = useState('');
     const [location, setDescription] = useState('')
-    const [images, setImages] = useState([]);
+    const[images, setImages] = useState([])
+
+    const handleImages = img=>{
+        setImages([...images,img]);
+    }
+    console.log(images);
   return (
     <View style={styles.container}>
         <TextInputComponent
@@ -25,13 +30,22 @@ const AddStadiumScreen = () => {
         />
         <Text style={styles.textImage}>Cargar Imagenes</Text>
         <View style={styles.imagesContainer}>
-            <TouchableOpacity style={styles.takeImage}>
-                  <Feather style={styles.iconCamera} name="camera" size={48} color="white" />
-            </TouchableOpacity>
+            <ImageSelector handleImage={handleImages}/>
             <TouchableOpacity style={styles.takeGalery}>
                      <MaterialIcons style={styles.iconCamera} name="photo" size={48} color="#258A4E" />
             </TouchableOpacity>
+            {images.length==0 ?
+            <Text>No hay Imagen cargada</Text>
+            :images.map(img =>
+                <View style={styles.preview}>
+                     <Image style={styles.image} source={{uri: img}}/>
+                </View>
+            )
+
+            
+            }
         </View>
+
         
     </View>
     
@@ -55,13 +69,7 @@ const styles = StyleSheet.create({
         fontFamily: 'OpenSansBold',
         
     },
-    takeImage:{
-        width: 103,
-        height: 93,
-        backgroundColor:'#258A4E',
-        borderRadius:10,
-        margin:'auto'
-    },
+    
     takeGalery:{
         width: 103,
         height: 93,
@@ -81,6 +89,18 @@ const styles = StyleSheet.create({
     iconCamera:{
         alignSelf:'center',
         top:22
+    },
+    image: {
+        width: 100,
+        height: 100,    
+        marginRight: 10
+    },
+    preview:{
+        top: 100,
+        right: 200,
+        flexWrap:'wrap',
+        display: 'flex'
+        
     }
 })
 export default AddStadiumScreen
