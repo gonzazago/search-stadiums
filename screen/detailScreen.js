@@ -1,14 +1,13 @@
 import React,{useEffect} from 'react'
 import Spinner from '../components/spinner';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import { searchStadiumByIdAction, searchStadiumsAction } from '../store/actions/stadiums/stadiumActions';
+import { searchStadiumByIdAction } from '../store/actions/stadiums/stadiumActions';
 import { useDispatch, useSelector } from 'react-redux';
 import { MaterialIcons } from '@expo/vector-icons';
 import Carrousel from '../components/carrousel';
 import {Rating} from 'react-native-ratings';
 
 const DetailScreen = ({ route, navigation }) => {
-  console.log('NAVIGATION:', navigation)
   const dispatch = useDispatch();
   const {id} = route.params;
   useEffect(() => {
@@ -21,10 +20,6 @@ const DetailScreen = ({ route, navigation }) => {
   const fetching = useSelector(state => state.stadiums.fetching);
   const stadium = useSelector(state => state.stadiums.stadium[0])
   
-  console.log ('STADIUM', stadium)
-
-
-
   return (
     !stadium ? 
       <Spinner hide={fetching} color={"rgba(37, 138, 78, 0.8)"}/> 
@@ -32,7 +27,11 @@ const DetailScreen = ({ route, navigation }) => {
     <View style={styles.container}>
         <View style={styles.headerDetailContainer}>
           <View style={styles.bannerContainer}>
+            {stadium.images ?
             <Carrousel style={styles.carrousel} url={stadium.images[0].url} />
+            :<View style={styles.carrousel}></View>
+          }
+            
               <TouchableOpacity style ={styles.likeContainer}>
                   <MaterialIcons style={styles.likeIcon} name="favorite-outline" size={24} color="white" />
               </TouchableOpacity>
@@ -41,11 +40,23 @@ const DetailScreen = ({ route, navigation }) => {
             <View style={styles.nameContainer}>
                 <Text style={styles.name}>{stadium.name}</Text>
             </View>
-                  <Rating
-                  showRating
+            <View
+            style={styles.rating}>
+            <Rating
+                type='custom' 
+                  showRating={false}
                   onFinishRating={() => console.log('ACA')}
-                  style={{ paddingVertical: 10 }}
+                  size= {20}
+                  imageSize={30}
+                  tintColor={'white'}
+                  ratingBackgroundColor={'C4C4C4'}
+                  ratingColor={'#258A4E'}
+                  style={{ width:160}}
                 />
+            </View>
+            <View style={styles.commentsContainer}>
+              <Text style={styles.comments}>12 comentarios</Text>
+            </View>  
           </View>
 
         </View>
@@ -69,7 +80,7 @@ const styles = StyleSheet.create({
   },
   carrousel:{
     height: '100%',
-    backgroundColor:'red'
+    backgroundColor:'grey'
   },
   descriptionContainer:{
     borderWidth:1,
@@ -113,7 +124,32 @@ const styles = StyleSheet.create({
     color: '#258A4E',
     padding: 10,
     marginRight:20
-
+  },
+  rating:{
+    top:30,
+    width: 193,
+    height: 34,
+  },
+  commentsContainer:{
+    width: 124,
+    height: 24,
+    left: 224,
+  },
+  comments:{
+    position: 'absolute',
+    width: 123,
+    height: 23,
+    left: 1,
+    top: 1,
+    fontFamily: 'OpenSans',
+    fontStyle: 'normal',
+    fontWeight: '700',
+    fontSize: 12,
+    lineHeight: 16,
+    display: 'flex',
+    alignItems: 'center',
+    textAlign: 'center',
+    color: '#258A4E'
   }
 
 })

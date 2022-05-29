@@ -12,15 +12,18 @@ const Stadium = (props) => {
         navigation.navigate('Detail',{id})
         
     }
-    const { id,name, distance, description, price, images} = stadium.item
+    const { id,name,address,location, distance, description, price, images} = stadium.item
   return (
     <View style={styles.stadium}>
         <View style={styles.carrousel}>
+            {images ?
             <ImageBackground source={{uri:images[0].url}} style={styles.image}></ImageBackground>
+        :<View style={styles.image}></View>}
+            
         </View>
         <View>
             <Text style={styles.title}>{name}</Text>
-            <Text style={styles.distance}>{`A ${distance} mts de Distancia`}</Text>
+            <Text style={styles.distance}>{`${address} - ${location}`}</Text>
         </View>
         <TouchableOpacity style={styles.location}>
         <EvilIcons style={styles.location_text} name="location" size={24} color="#258a4e"/>
@@ -67,6 +70,7 @@ const styles = StyleSheet.create({
         elevation:5,
     },
     title:{
+        marginTop:10,
         position: 'absolute',
         width: 150,
         height: 16,
@@ -78,16 +82,8 @@ const styles = StyleSheet.create({
         color: '#258A4E',
         marginLeft: 20
     },
-    distance:{
-        width: 200,
-        height: 17,
-        color: '#258A4E',
-        top:35,
-        marginLeft: 20,
-        fontFamily: 'OpenSansBold',
-        fontSize:12       
-    },
     location:{
+        marginTop:10,
         flexDirection:'row',
         backgroundColor:  "rgba(37, 138, 78, 0.19)",
         height: 54,

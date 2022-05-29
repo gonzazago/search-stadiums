@@ -1,9 +1,12 @@
-import { SEARCH_STADIUMS, SEARCH_STADIUMS_SUCCESS, SEARCH_STADIUM_BY_ID, SEARCH_STADIUM_BY_ID_SUCCESS } from '../actions/stadiums/actions';
+import { ADD_STADIUM_ACCTION, SEARCH_STADIUMS, SEARCH_STADIUMS_SUCCESS, SEARCH_STADIUM_BY_ID, SEARCH_STADIUM_BY_ID_SUCCESS } from '../actions/stadiums/actions';
 
 const initialSate = {
     fetching:true,
     stadium: {},
     stadiums: [],
+    error: false,
+    succes:false,
+    refresh:false,
 }
 
 const stadiumReducer = (state = initialSate, action) =>{
@@ -12,6 +15,7 @@ const stadiumReducer = (state = initialSate, action) =>{
     switch (type){
         case SEARCH_STADIUMS:
         case SEARCH_STADIUM_BY_ID:
+        case ADD_STADIUM_ACCTION:
              return {...state, fetching: payload};
         case SEARCH_STADIUMS_SUCCESS: 
         return{   
@@ -20,9 +24,9 @@ const stadiumReducer = (state = initialSate, action) =>{
             stadiums: payload
         };
         case SEARCH_STADIUM_BY_ID_SUCCESS:
-            console.log('SEARCH_STADIUM_BYD')
-            console.log('PAYLOAD:', payload);
             return{...state,fetching:false,stadium:payload};
+        case SEARCH_STADIUMS_SUCCESS:
+            return{...state, refresh:true, stadium:payload}
         default: return state;
     }
     

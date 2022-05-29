@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { KeyboardAvoidingView, ScrollView, StyleSheet, TextInput, View } from 'react-native'  
+import { KeyboardAvoidingView, Platform, ScrollView, StyleSheet, TextInput, View } from 'react-native'  
 import ButtonForm from '../components/Button';
 import Form from '../components/Form';
 import colors from '../constanst/color';

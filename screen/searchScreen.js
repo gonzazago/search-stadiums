@@ -11,10 +11,11 @@ const SearchScreen = props => {
     useEffect(() => {
         const fetchStadiums = () => dispatch(searchStadiumsAction());
         fetchStadiums();
-    }, [])
+    }, [refresh])
     
     const fetching = useSelector(state =>  state.stadiums.fetching);
     const stadiums = useSelector(state => state.stadiums.stadiums);
+    const refresh = useSelector(state => state.stadiums.refresh);
     const renderItem = (stadium)  => {
     return <Stadium stadium={stadium}/>}
   return (

@@ -1,65 +1,90 @@
  import React,{useState} from 'react'
-import {View,ScrollView, StyleSheet, Text,TouchableOpacity, Image} from 'react-native'
+import {View, StyleSheet, Text,TouchableOpacity, ScrollView, KeyboardAvoidingView, Platform, Alert} from 'react-native'
+import { useDispatch } from 'react-redux';
+import { addStadiumAction } from '../store/actions/stadiums/stadiumActions';
+import { v4 as uuidv4 } from 'uuid';
 
-import { MaterialIcons } from '@expo/vector-icons';
 import TextInputComponent from '../components/textInputComponent';
 import ImageSelector from '../components/ImageSelector';
+import CameraComponent from '../components/cameraComponent';
+import 'react-native-get-random-values'
+import { useNavigation } from '@react-navigation/native';
 
 
 const AddStadiumScreen = () => {
+    const dispatch = useDispatch();
+    const navigation = useNavigation();
     const [name, setName] = useState('');
+    const [location, setLocation] = useState('');
     const [address, setAddress] = useState('');
     const [price, setPrice] = useState('');
-    const [location, setDescription] = useState('')
-    const[images, setImages] = useState([])
+    const [images, setImages] = useState([])
 
     const handleImages = img=>{
         setImages([...images,img]);
     }
-    console.log(images);
+    const saveStadium = ()=>{
+        const stadium ={ 
+            id: uuidv4(),
+            name,
+            location,
+            address,
+            price,
+            images
+        }
+        dispatch(addStadiumAction(stadium))
+        navigation.navigate('Search')
+    }
+
   return (
-    <View style={styles.container}>
-        <TextInputComponent
-            placeholder='Nombre de la Cancha'
-            handleOnchange={setName}
-        />
-        <TextInputComponent
-            placeholder='Precio'
-            handleOnchange={setName}
-            keyboardType="numeric"
-        />
-        <Text style={styles.textImage}>Cargar Imagenes</Text>
-        <View style={styles.imagesContainer}>
-            <ImageSelector handleImage={handleImages}/>
-            <TouchableOpacity style={styles.takeGalery}>
-                     <MaterialIcons style={styles.iconCamera} name="photo" size={48} color="#258A4E" />
-            </TouchableOpacity>
-            {images.length==0 ?
-            <Text>No hay Imagen cargada</Text>
-            :images.map(img =>
-                <View style={styles.preview}>
-                     <Image style={styles.image} source={{uri: img}}/>
-                </View>
-            )
-
-            
-            }
-        </View>
-
-        
-    </View>
-    
+      <ScrollView style={styles.container} >
+         <KeyboardAvoidingView
+           behavior={Platform.OS === "ios" ? "padding" : "height"}
+           style={styles.containerAction} >
+              <TextInputComponent
+              placeholder='Nombre de la Cancha'
+              handleOnchange={setName}
+          />
+          <TextInputComponent
+              placeholder='Precio'
+              handleOnchange={setPrice}
+              keyboardType="numeric"
+          />
+          <TextInputComponent
+              placeholder='Localidad'
+              handleOnchange={setLocation}
+          />
+          <TextInputComponent
+              placeholder='Direccion'
+              handleOnchange={setAddress}
+          />
+          <Text style={styles.textImage}>Cargar Imagenes</Text>
+          <View style={styles.imagesContainer}>
+              <ImageSelector handleImage={handleImages}/>
+              <CameraComponent handleImage={handleImages}/>
+              {images.length==0 ?
+              <Text style={styles.imagesInfo}>No hay Imagen cargada</Text>
+              :
+              <Text style={styles.imagesInfo}>Imagenes Seleccionadas: {images.length}</Text>
+              }
+          </View>
+  
+          <TouchableOpacity style={styles.addButton} onPress={saveStadium}>
+              <Text style={styles.addButtonText}>Guardar Cancha</Text>
+          </TouchableOpacity>
+          </KeyboardAvoidingView>
+      </ScrollView>
   )
 }
 const styles = StyleSheet.create({
-        container:{
+    container:{
         width: 350,
         height: '80%',
         left: 30,
         top: 70,
         margin:'auto',
         borderRadius:10,
-        elevation:0.4
+        flex: 1
     },
     textImage:{
         alignSelf:'center',
@@ -69,7 +94,6 @@ const styles = StyleSheet.create({
         fontFamily: 'OpenSansBold',
         
     },
-    
     takeGalery:{
         width: 103,
         height: 93,
@@ -81,10 +105,12 @@ const styles = StyleSheet.create({
     },
     imagesContainer:{
         width: 250,
+        height: 100,
         flexDirection:'row',
         justifyContent:'space-between',
         top: 50,
-        alignSelf:'center'
+        alignSelf:'center',
+        marginBottom:150
     },
     iconCamera:{
         alignSelf:'center',
@@ -95,12 +121,42 @@ const styles = StyleSheet.create({
         height: 100,    
         marginRight: 10
     },
-    preview:{
-        top: 100,
-        right: 200,
-        flexWrap:'wrap',
-        display: 'flex'
-        
+    imagesInfo:{
+        width: 169,
+        height: 32,
+        right:195,
+        justifyContent:'center',
+        fontFamily: 'OpenSansBold',
+        fontStyle: 'normal',
+        top:150,
+        fontWeight: '600',
+        fontSize: 12,
+        lineHeight: 15,
+        alignItems: 'center',
+        textAlign: 'center',
+        color: '#258A4E'
+    },
+    addButton:{
+        width: 259,
+        height: 38,
+        alignSelf:'center',
+        backgroundColor: '#258A4E'
+    },
+    addButtonText:{
+        position: 'absolute',
+        width: 200,
+        height: 30,
+        left: 25 ,
+        top: 10,
+        fontFamily: 'OpenSansBold',
+        fontStyle: 'normal',
+        //fontWeight: '600',
+        fontSize: 12,
+        lineHeight: 15,
+        display: 'flex',
+        alignItems: 'center',
+        textAlign: 'center',
+        color: '#FFFFFF'
     }
 })
 export default AddStadiumScreen

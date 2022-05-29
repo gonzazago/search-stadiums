@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
-import PropTypes from 'prop-types'
-import { Feather } from '@expo/vector-icons';
-import { Alert, Image, StyleSheet, Text, TouchableOpacity,View } from 'react-native'
+import { MaterialIcons } from '@expo/vector-icons';
+import { Alert, StyleSheet,TouchableOpacity,View } from 'react-native'
 import * as ImagePicker from 'expo-image-picker';
 
 const ImageSelector = props => {
@@ -39,7 +38,7 @@ const ImageSelector = props => {
     <TouchableOpacity 
         style={styles.takeImage}
         onPress={handlerTakeImage}>
-        <Feather style={styles.iconCamera} name="camera" size={48} color="white" />
+        <MaterialIcons style={styles.iconCamera} name="photo" size={48} color="white" />
     </TouchableOpacity>
     
   )
@@ -54,7 +53,8 @@ const styles = StyleSheet.create({
         height: 93,
         backgroundColor:'#258A4E',
         borderRadius:10,
-        margin:'auto'
+        margin:'auto',
+        marginRight:40
     },
     iconCamera:{
         alignSelf:'center',
