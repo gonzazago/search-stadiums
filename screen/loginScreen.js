@@ -9,7 +9,6 @@ const  Login = () => {
   const [userName, setUserName]  = useState('')
   const [password, setPassword] = useState('')
   const handleUserName = (target) => {
-   console.log( target)
    setUserName(target)
   }
   return (

@@ -45,7 +45,7 @@ const DetailScreen = ({ route, navigation }) => {
             <Rating
                 type='custom' 
                   showRating={false}
-                  onFinishRating={() => console.log('ACA')}
+                  onFinishRating={() =>{}}
                   size= {20}
                   imageSize={30}
                   tintColor={'white'}

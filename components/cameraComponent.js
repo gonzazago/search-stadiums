@@ -10,7 +10,6 @@ const [ pickerURI, setPickerURI ] = useState();
 
 const verifyPermissions = async () => {
     const { status } = await ImagePicker.requestCameraPermissionsAsync();
-    console.log(status);
     if(status !== 'granted') {
         Alert.alert('Permisos Insuficientes',
         'Necesita dar permisos de la camara para usar la aplicacion.', 

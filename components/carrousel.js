@@ -4,7 +4,6 @@ import { StyleSheet, View,ImageBackground,TouchableOpacity } from 'react-native'
 
 
 const Carrousel = ({url, style}) => {
-    console.log(style)
   return (
     <View style={{...styles.carrousel, ...style.carrousel}}>
         <ImageBackground source={{uri:url}} style={{...styles.image,...style.image}}></ImageBackground>

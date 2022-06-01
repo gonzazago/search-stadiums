@@ -9,7 +9,7 @@ export const getStadiums = ()=>{
 
 export const getStadiumById = (id) =>{
     return firebaseClient
-    .get(`${COLLECTION}?orderBy="id"&equalTo=${id}`)
+    .get(`${COLLECTION}?orderBy="id"&equalTo="${id}"`)
     .catch(err =>console.log(`Error try get stadium by id: ${id}`, err));
 }
 

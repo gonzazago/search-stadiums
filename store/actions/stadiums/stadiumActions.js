@@ -8,7 +8,6 @@ export function searchStadiumsAction(){
         dispatch(searchStadiums());
         try{
             const response = await getStadiums('stadium.json');
-            console.log(response)
             dispatch(searchStadiumsSuccess(transformData(response.data)))
         }catch(err){
             console.log(err);
@@ -20,6 +19,7 @@ export function searchStadiumByIdAction (id){
     return async dispatch =>{
         try{
             const response = await getStadiumById(id);
+            console.log(response)
             const stadium = transformData(response.data);
             dispatch(searchStadiumByIdSuccess(stadium))
         }catch(err){
@@ -32,7 +32,6 @@ export function addStadiumAction (stadium){
     return async dispatch =>{
         try{
             const response = await addStadium(stadium);
-            console.log(response);
             dispatch(addStadiumSuccess(response.data))
             Alert.alert(
                 "Cancha Agregada Correctamente",

@@ -1,16 +1,19 @@
-import { initializeApp } from "firebase/app";
-import { getStorage, ref,uploadBytesResumable,getDownloadURL  } from "firebase/storage";
+import { initializeApp } from 'firebase/app';
+import { getDatabase } from "firebase/database";
+import { getStorage, ref,uploadBytesResumable,getDownloadURL   } from "firebase/storage";
 
 const firebaseConfig = {
-  apiKey: '6dc449238ebed9c55f199407c8b7dc27821e92d3	',
-  storageBucket:'gs://coderhouse-rn.appspot.com'
+  apiKey: "AIzaSyDG8WM-JkZgprVrhCi0QNRppBCkB5QAfIA",
+  authDomain: "coderhouse-rn.firebaseapp.com",
+  databaseURL: "https://coderhouse-rn-default-rtdb.firebaseio.com",
+  projectId: "coderhouse-rn",
+  storageBucket: "coderhouse-rn.appspot.com",
+  messagingSenderId: "709226826594",
+  appId: "1:709226826594:web:9175ea0f2d37da5288fa3b",
+  measurementId: "G-50ZPR573HF"
 };
 const firebaseApp = initializeApp(firebaseConfig);
-console.log(firebaseApp.options)
-//const storage = getStorage(firebaseApp)
-//console.log(storage)
-
-// Get a reference to the storage service, which is used to create references in your storage bucket
-//const storage = getStorage(firebaseApp,'gs://coderhouse-rn.appspot.com');
+//const db = getDatabase(firebaseApp);
+//console.log(db);
 
 

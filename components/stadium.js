@@ -12,7 +12,8 @@ const Stadium = (props) => {
         navigation.navigate('Detail',{id})
         
     }
-    const { id,name,address,location, distance, description, price, images} = stadium.item
+    console.log('STADIUM: ',stadium.item.stadium)
+    const { id,name,address,location, description, price, images} = stadium.item.stadium
   return (
     <View style={styles.stadium}>
         <View style={styles.carrousel}>

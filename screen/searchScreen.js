@@ -7,11 +7,17 @@ import Spinner from '../components/spinner';
 
 const SearchScreen = props => {
     const dispatch = useDispatch();
+    const {navigation} = props;
 
     useEffect(() => {
-        const fetchStadiums = () => dispatch(searchStadiumsAction());
-        fetchStadiums();
-    }, [refresh])
+        const unsubscribe = navigation.addListener('focus', () => {        
+          dispatch(searchStadiumsAction());
+        });  
+        return unsubscribe;      
+      }, [navigation])
+      
+    
+
     
     const fetching = useSelector(state =>  state.stadiums.fetching);
     const stadiums = useSelector(state => state.stadiums.stadiums);
@@ -29,6 +35,7 @@ const SearchScreen = props => {
                 data={stadiums}
                 renderItem={renderItem}
                 keyExtractor = {stadium => stadium.id}
+                refreshing={refresh}
             />
         </View>
 

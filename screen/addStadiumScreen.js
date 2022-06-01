@@ -32,7 +32,8 @@ const AddStadiumScreen = () => {
             price,
             images
         }
-        dispatch(addStadiumAction(stadium))
+        console.log({stadium:stadium})
+        dispatch(addStadiumAction({stadium:stadium}))
         navigation.navigate('Search')
     }
 
