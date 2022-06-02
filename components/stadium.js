@@ -12,13 +12,12 @@ const Stadium = (props) => {
         navigation.navigate('Detail',{id})
         
     }
-    console.log('STADIUM: ',stadium.item.stadium)
-    const { id,name,address,location, description, price, images} = stadium.item.stadium
+    const { id,name,address,location, description, price, images} = stadium.item
   return (
     <View style={styles.stadium}>
         <View style={styles.carrousel}>
             {images ?
-            <ImageBackground source={{uri:images[0].url}} style={styles.image}></ImageBackground>
+            <ImageBackground source={{uri:images.url}} style={styles.image}></ImageBackground>
         :<View style={styles.image}></View>}
             
         </View>
@@ -62,7 +61,7 @@ const styles = StyleSheet.create({
     },
     stadium:{
         width: '95%',
-        height: 350,
+        height: 400,
         backgroundColor:"#E4E4E4",
         flexDirection:'column',
         alignSelf:'center',
@@ -120,7 +119,7 @@ const styles = StyleSheet.create({
     },
     bottom:{
         flexDirection:'row',
-        justifyContent: 'space-between'
+        justifyContent: 'space-between',
     
     },
     buttonDetail:{

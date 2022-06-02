@@ -31,7 +31,7 @@ const SearchScreen = props => {
         :
         <View style={styles.container}>
             <FlatList
-                style={{marginBottom:80, height:'100%'}}
+                style={{marginBottom:200}}
                 data={stadiums}
                 renderItem={renderItem}
                 keyExtractor = {stadium => stadium.id}
@@ -45,7 +45,7 @@ const styles = StyleSheet.create({
     container:{
         backgroundColor: "#FFF9F9",
         width: "100%",
-        height: "100%",
+        height: 900,
         
     },
     

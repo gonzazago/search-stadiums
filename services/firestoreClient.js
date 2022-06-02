@@ -1,19 +1,26 @@
-import { initializeApp } from 'firebase/app';
-import { getDatabase } from "firebase/database";
-import { getStorage, ref,uploadBytesResumable,getDownloadURL   } from "firebase/storage";
 
-const firebaseConfig = {
-  apiKey: "AIzaSyDG8WM-JkZgprVrhCi0QNRppBCkB5QAfIA",
-  authDomain: "coderhouse-rn.firebaseapp.com",
-  databaseURL: "https://coderhouse-rn-default-rtdb.firebaseio.com",
-  projectId: "coderhouse-rn",
-  storageBucket: "coderhouse-rn.appspot.com",
-  messagingSenderId: "709226826594",
-  appId: "1:709226826594:web:9175ea0f2d37da5288fa3b",
-  measurementId: "G-50ZPR573HF"
-};
-const firebaseApp = initializeApp(firebaseConfig);
-//const db = getDatabase(firebaseApp);
-//console.log(db);
+import { collection, getDocs, getFirestore, addDoc, query, where, limit } from "firebase/firestore/lite";
+import {firebaseApp} from './firebase';
+const db = getFirestore(firebaseApp);
 
 
+
+export const getData = async (collectionName) =>{
+  const stadiumCollection = collection(db,collectionName);
+  const stadiumSnapshot = await getDocs(stadiumCollection);
+  const stadiumList = stadiumSnapshot.docs.map(doc => doc.data());
+  return stadiumList;
+}
+
+export const addData = async (collectionName, document) =>{
+  await addDoc(collection(db,collectionName),document)
+}
+
+export const getDataById = async (collectionName,id) =>{
+  const dbRef = collection(db,collectionName);
+  const q = query(dbRef,where("id","==",id),limit(1))
+  const documentsSnapShot = await getDocs(q);
+  const documentList = documentsSnapShot.docs.map(doc => doc.data());
+  console.log(documentList)
+  return documentList[0]
+}

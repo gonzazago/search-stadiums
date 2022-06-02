@@ -2,13 +2,14 @@ import { ADD_STADIUM_ACCTION_ERROR, ADD_STADIUM_ACCTION_SUCCESS, SEARCH_STADIUMS
 import { transformData } from "../../../utils/transformData";
 import { getStadiumById, getStadiums,addStadium } from "../../../services/stadiumServices";
 import { Alert } from "react-native";
+import { geStadiumsFs, getData } from "../../../services/firestoreClient";
 
 export function searchStadiumsAction(){
     return async (dispatch) =>{
         dispatch(searchStadiums());
         try{
-            const response = await getStadiums('stadium.json');
-            dispatch(searchStadiumsSuccess(transformData(response.data)))
+            const stadiums = await getStadiums()
+            dispatch(searchStadiumsSuccess(stadiums))
         }catch(err){
             console.log(err);
         }
@@ -19,8 +20,7 @@ export function searchStadiumByIdAction (id){
     return async dispatch =>{
         try{
             const response = await getStadiumById(id);
-            console.log(response)
-            const stadium = transformData(response.data);
+            const stadium = transformData(response);
             dispatch(searchStadiumByIdSuccess(stadium))
         }catch(err){
             console.log(err);
@@ -31,8 +31,8 @@ export function searchStadiumByIdAction (id){
 export function addStadiumAction (stadium){
     return async dispatch =>{
         try{
-            const response = await addStadium(stadium);
-            dispatch(addStadiumSuccess(response.data))
+            addStadium(stadium);
+            dispatch(addStadiumSuccess())
             Alert.alert(
                 "Cancha Agregada Correctamente",
                 "Su cancha ha sido guardad correctamente",
@@ -66,9 +66,9 @@ const searchStadiumByIdSuccess = (stadium) =>({
 
 
 
-const addStadiumSuccess = (stadium) =>({
+const addStadiumSuccess = () =>({
     type: ADD_STADIUM_ACCTION_SUCCESS,
-    payload: stadium
+    payload: true
 })
 
 const addStadiumError = () =>({

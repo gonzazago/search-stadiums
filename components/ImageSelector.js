@@ -1,11 +1,12 @@
 import React, { useState } from 'react'
 import { MaterialIcons } from '@expo/vector-icons';
-import { Alert, StyleSheet,TouchableOpacity,View } from 'react-native'
+import { Alert, StyleSheet,Text,TouchableOpacity,View } from 'react-native'
 import * as ImagePicker from 'expo-image-picker';
+import { uploadFile } from '../services/storageClient';
 
 const ImageSelector = props => {
     const {handleImage} = props
-    const [ pickerURI, setPickerURI ] = useState();
+    const [ progress, setProgress ] = useState('');
     const verifyPermissions = async () =>{
         const {status} = await ImagePicker.requestCameraPermissionsAsync();
 
@@ -29,8 +30,11 @@ const ImageSelector = props => {
             aspect: [16,9],
             quality: 0.8
         })
-        setPickerURI(image.uri)
-        handleImage(image.uri);
+
+        const urlImage = await uploadFile(image.uri);
+        
+        setProgress(urlImage)
+        handleImage(urlImage);
     }
 
 
@@ -39,6 +43,7 @@ const ImageSelector = props => {
         style={styles.takeImage}
         onPress={handlerTakeImage}>
         <MaterialIcons style={styles.iconCamera} name="photo" size={48} color="white" />
+        <Text style = {styles.progres}>Progress: {progress}</Text>
     </TouchableOpacity>
     
   )
@@ -59,6 +64,9 @@ const styles = StyleSheet.create({
     iconCamera:{
         alignSelf:'center',
         top:22
+    },
+    progres:{
+        top:50,
     }
 })
 export default ImageSelector

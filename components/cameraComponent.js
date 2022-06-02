@@ -2,7 +2,8 @@ import React,{useState}from 'react'
 import * as ImagePicker from 'expo-image-picker';
 import { Entypo } from '@expo/vector-icons'; 
 import { StyleSheet, TouchableOpacity, View } from 'react-native';
-import { uploadFile } from '../services/firestoreClient';
+import { uploadFile } from '../services/storageClient';
+
 
 const CameraComponent = ({handleImage}) => {
 
@@ -28,9 +29,9 @@ const verifyPermissions = async () => {
         allowsEditing: true,
         quality: 0.8
     })
-    uploadFile(image.uri);
+    const url  = await uploadFile(image.uri);
     setPickerURI(image.uri);
-    handleImage(image.uri);
+    handleImage(url);
 }
 
     return (

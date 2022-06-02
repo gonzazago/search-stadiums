@@ -9,6 +9,7 @@ import ImageSelector from '../components/ImageSelector';
 import CameraComponent from '../components/cameraComponent';
 import 'react-native-get-random-values'
 import { useNavigation } from '@react-navigation/native';
+import { uploadFile } from '../services/storageClient';
 
 
 const AddStadiumScreen = () => {
@@ -23,7 +24,7 @@ const AddStadiumScreen = () => {
     const handleImages = img=>{
         setImages([...images,img]);
     }
-    const saveStadium = ()=>{
+    const saveStadium = async ()=>{
         const stadium ={ 
             id: uuidv4(),
             name,
@@ -32,8 +33,13 @@ const AddStadiumScreen = () => {
             price,
             images
         }
-        console.log({stadium:stadium})
-        dispatch(addStadiumAction({stadium:stadium}))
+        console.log(stadium)
+        dispatch(addStadiumAction(stadium))
+        setName('');
+        setLocation('');
+        setAddress('');
+        setPrice('')
+        setImages([])
         navigation.navigate('Search')
     }
 
